@@ -2,14 +2,20 @@ package com.nelioalves.cursomc.domain;
 
 import java.io.Serializable;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Categoria  implements Serializable{
+
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L; //versao da classe serializer que éa numero um
 	// e um interface onde o objetos pode convertido e byte para que objetos pode gravado em arquivos e trafegado em rede
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)//DEFINIDO A ESTRATEGIA DE GERAÇÃO AUTOMATICA DE ID 
 	private Integer id;
 	private  String nome;
 	
