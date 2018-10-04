@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+// CAMADA DE DOMINIO OU DOMAIN
 @Entity
 public class Categoria  implements Serializable{
 
