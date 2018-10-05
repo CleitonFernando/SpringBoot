@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.nelioalves.cursomc.domain.Categoria;
 import com.nelioalves.cursomc.services.CategoriaService;
 
-// CAMADA CONTROLADORES REST
+// CAMADA CONTROLADORES REST costuma-se ter metodos pequenos
 
 @RestController // QUE RECEBE A NOTAÇÃO REST CONTROLLER
 @RequestMapping(value="/categorias") //E NOTACAO REQUEST MAPPING AO INICIALIZAR AO SPRING BOOT ACESSAR NA UM LOCALHOST:8080/CATEGORIAS
@@ -29,7 +29,8 @@ public class CategoriaResources {
 	
 	@RequestMapping(value="/{id}",method = RequestMethod.GET)
 	public ResponseEntity<?> find(@PathVariable Integer id) { 	// esse reponse é um tipo especial do spring boot que ele ja encapsula e armazena varias informações de uma repostas http para um serviço rest <?> pode ser varias tipos pode encontrar ou não econtrar
-
+		
+			
 		Categoria obj = service.find(id);
 		return ResponseEntity.ok().body(obj); //retorna uma respostas que ocorreu com sucesso e juntamente com obj
 	}

@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.nelioalves.cursomc.domain.Categoria;
 import com.nelioalves.cursomc.repositories.CategoriaRepository;
+import com.nelioalves.cursomc.services.exceptions.*;
+
 
 //CAMADA DE SERVIÇO
 /*
@@ -20,13 +22,16 @@ public class CategoriaService {
 	@Autowired
 	private CategoriaRepository repo;
 	
-	/*
+		/*
 	 * Este metodo vai no banco de dados  retorna a categoria com este id
 	 */
+	
 	public Categoria find(Integer id) {
 		
-		Optional<Categoria> obj = repo.findById(id);
-		return obj.orElse(null);
+		Optional<Categoria> obj = repo.findById(id); // buscando por id
+								
+		// caso não encontre o id ele devera retornar  um mensagem com o id não encontrado caso ocorra essa exceção a camada rest resources recebera essa exceção
+		return obj.orElseThrow(()->new ObjectNotFoundException("Objeto não encontrado!id:"+ id + ",tipo:"+ Categoria.class.getName()));
 	}
 	
 }
