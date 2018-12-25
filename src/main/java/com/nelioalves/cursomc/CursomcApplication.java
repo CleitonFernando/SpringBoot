@@ -9,10 +9,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.nelioalves.cursomc.domain.Categoria;
 import com.nelioalves.cursomc.domain.Cidade;
+import com.nelioalves.cursomc.domain.Cliente;
+import com.nelioalves.cursomc.domain.Endereco;
 import com.nelioalves.cursomc.domain.Estado;
 import com.nelioalves.cursomc.domain.Produto;
+import com.nelioalves.cursomc.domain.enums.TipoCliente;
 import com.nelioalves.cursomc.repositories.CategoriaRepository;
 import com.nelioalves.cursomc.repositories.CidadeRepository;
+import com.nelioalves.cursomc.repositories.ClienteRepository;
+import com.nelioalves.cursomc.repositories.EnderecoRepository;
 import com.nelioalves.cursomc.repositories.EstadoRepository;
 import com.nelioalves.cursomc.repositories.ProdutoRepository;
 
@@ -30,6 +35,11 @@ public class CursomcApplication implements CommandLineRunner {
 	private EstadoRepository estadoRepository;
 	@Autowired
 	private CidadeRepository cidadeRepository;
+	@Autowired
+	private ClienteRepository clienteRepository;
+	@Autowired
+	private EnderecoRepository enderecoRepository;
+	
 	
 	public static void main(String[] args) {
 		SpringApplication.run(CursomcApplication.class, args);
@@ -70,6 +80,15 @@ public class CursomcApplication implements CommandLineRunner {
 		est2.getCidades().addAll(Arrays.asList(c2));
 		est2.getCidades().addAll(Arrays.asList(c3));
 		
+		//instanciando cliente
+		Cliente cli1 = new Cliente(null,"maria","maria@gmail.com","123",TipoCliente.PESSOAFISICA);
+		// adicionando telefones a lista
+		cli1.getTelefones().addAll(Arrays.asList("1885","8555"));
+		// instancia endereços
+		Endereco e1 = new Endereco(null,"Rua flores","300","apto 303","Jardim","38220834",cli1,c1);
+		Endereco e2 = new Endereco(null,"Avenida Matos","105","sala 800","centro","387777012",cli1,c2);
+		// adicionando endereços a lista
+		cli1.getEnderecos().addAll(Arrays.asList(e1,e2));
 		
 		
 		// Salvando a categoria no banco de dados no repository 
@@ -80,6 +99,10 @@ public class CursomcApplication implements CommandLineRunner {
 		estadoRepository.saveAll(Arrays.asList(est1,est2));
 		// salvando a cidade no banco de dados 
 		cidadeRepository.saveAll(Arrays.asList(c1,c2,c3));
+		/// salvando cliente no banco de dados
+		clienteRepository.saveAll(Arrays.asList(cli1));
+		// salvando endereços no banco de dados
+		enderecoRepository.saveAll(Arrays.asList(e1,e2));
 		
 		
 	}
