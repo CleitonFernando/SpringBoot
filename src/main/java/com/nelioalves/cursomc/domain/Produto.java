@@ -14,7 +14,7 @@ import javax.persistence.ManyToMany;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
-@Entity
+@Entity //indica que uma entidade jpa
 public class Produto implements Serializable {
 	
 	private static final long serialVersionUID = 1L; //versao da classe serializer que éa numero um
@@ -30,7 +30,7 @@ public class Produto implements Serializable {
 	 * um produto pode ter varias categorias então cria-se uma tela nova  com id das duas tabelas
 	 */
 	@JsonBackReference // ele faz do outra lado da associação foi buscando objetos eu nao busco mais  ele ira omitar uma lista de categoria a cada produto evitar referencia ciclica
-	@ManyToMany // notacao para criar-se a tabela entre categoria e produto
+	@ManyToMany // notacao para criar-se a tabela entre categoria e produto (muitos para muitos)
 	@JoinTable(// essa tabela faz muitas para muitos
 			name = "PRODUTO_CATEGORIA", // nome da tabela
 			joinColumns = @JoinColumn(name="produto_id"),// id do produto chave estrangeira foreign key

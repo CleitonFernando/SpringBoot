@@ -4,15 +4,18 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import org.hibernate.validator.constraints.Length;
+
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-// CAMADA DE DOMINIO OU DOMAIN
+// CAMADA DE DOMINIO OU DOMAIN Model
 @Entity
 public class Categoria  implements Serializable{
 
@@ -23,6 +26,9 @@ public class Categoria  implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)//DEFINIDO A ESTRATEGIA DE GERAÇÃO AUTOMATICA DE ID 
 	private Integer id;
+	
+	@Length(max=65) /// tamanho maximo
+	@Column(nullable=false)
 	private  String nome;
 	
 	@JsonManagedReference // referencia gerenciada pelo json se faz isso no lado que voce quer que os objetos venha referenciados referencia ciclica

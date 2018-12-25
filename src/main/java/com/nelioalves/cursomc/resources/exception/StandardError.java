@@ -2,7 +2,7 @@ package com.nelioalves.cursomc.resources.exception;
 
 import java.io.Serializable;
 /*
- * erro padrao
+ * Erro padrao
  */
 public class StandardError implements Serializable{
 	

@@ -12,7 +12,7 @@ import com.nelioalves.cursomc.services.exceptions.*;
 
 //CAMADA DE SERVIÇO
 /*
- *  Esta camada efetua uma chamada a categoriaRepositry que acessa ao banco de dados 
+ *  Esta camada efetua uma chamada a categoriaRepository que acessa ao banco de dados 
  */
 
 @Service // notação necessaria

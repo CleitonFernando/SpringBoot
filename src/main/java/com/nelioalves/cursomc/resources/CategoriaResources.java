@@ -28,9 +28,7 @@ public class CategoriaResources {
 	private CategoriaService service;  // acessando o serviço
 	
 	@RequestMapping(value="/{id}",method = RequestMethod.GET)
-	public ResponseEntity<?> find(@PathVariable Integer id) { 	// esse reponse é um tipo especial do spring boot que ele ja encapsula e armazena varias informações de uma repostas http para um serviço rest <?> pode ser varias tipos pode encontrar ou não econtrar
-		
-			
+	public ResponseEntity<?> find(@PathVariable Integer id) { 	// esse reponse é um tipo especial do spring boot que ele ja encapsula e armazena varias informações de uma respostas http para um serviço rest <?> pode ser varias tipos pode encontrar ou não encontrar
 		Categoria obj = service.find(id);
 		return ResponseEntity.ok().body(obj); //retorna uma respostas que ocorreu com sucesso e juntamente com obj
 	}
