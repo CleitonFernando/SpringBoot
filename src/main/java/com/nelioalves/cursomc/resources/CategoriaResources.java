@@ -29,11 +29,12 @@ public class CategoriaResources {
 	private CategoriaService service;  // acessando o serviço
 	
 	@RequestMapping(value="/{id}",method = RequestMethod.GET)
-	public ResponseEntity<?> find(@PathVariable Integer id) { 	// esse reponse é um tipo especial do spring boot que ele ja encapsula e armazena varias informações de uma respostas http para um serviço rest <?> pode ser varias tipos pode encontrar ou não encontrar
+	public ResponseEntity<Categoria> find(@PathVariable Integer id) { 	// esse reponse é um tipo especial do spring boot que ele ja encapsula e armazena varias informações de uma respostas http para um serviço rest <?> pode ser varias tipos pode encontrar ou não encontrar
 		Categoria obj = service.find(id);
 		return ResponseEntity.ok().body(obj); //retorna uma respostas que ocorreu com sucesso e juntamente com obj
 	}
 	
+	// postar criar
 	@RequestMapping(method=RequestMethod.POST) /// declarando o metodo post
 	public ResponseEntity<Void> insert(@RequestBody Categoria obj){ // essa anotação faz o json ser convertido em java automaticamente
 		
@@ -41,7 +42,16 @@ public class CategoriaResources {
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/id").buildAndExpand(obj.getId()).toUri();
 		
-		return ResponseEntity.created(uri).build(); // return a uri
+		return ResponseEntity.created(uri).build(); // return a uri  201
+	}
+
+	/// atualizar dados
+	@RequestMapping(value="/{id}",method=RequestMethod.PUT)
+	public ResponseEntity<Void>update(@RequestBody Categoria obj ,@PathVariable Integer id){
+		obj.setId(id);
+		obj = service.update(obj);
+		
+		return ResponseEntity.noContent().build(); /// noContent 204 não retorna nada
 	}
 	
 	
