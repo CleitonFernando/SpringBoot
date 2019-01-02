@@ -13,8 +13,6 @@ import javax.persistence.ManyToMany;
 
 import org.hibernate.validator.constraints.Length;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 // CAMADA DE DOMINIO OU DOMAIN Model
 @Entity
 public class Categoria  implements Serializable{
@@ -31,7 +29,6 @@ public class Categoria  implements Serializable{
 	@Column(nullable=false)
 	private  String nome;
 	
-	@JsonManagedReference // referencia gerenciada pelo json se faz isso no lado que voce quer que os objetos venha referenciados referencia ciclica
 	@ManyToMany(mappedBy = "categorias")// mapeamento  da categoria ja feito do outra lado na classe produto em cima de categorias que a lista
 	private List<Produto> produto = new ArrayList<>(); // muitos para muitos dos dois lados
 	

@@ -5,12 +5,9 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
-import javax.persistence.Id;
 
 
 @Entity
@@ -22,7 +19,6 @@ public class Cidade implements Serializable {
 	private Integer id;
 	private String nome; 
 	
-	@JsonManagedReference /// libera a serialização do estado 
 	@ManyToOne // notação muitos para um // obs: varias cidade pertence a unico estado
 	@JoinColumn(name="estado_id") // foreign key 
 	private Estado estado;

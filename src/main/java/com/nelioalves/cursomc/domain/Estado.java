@@ -7,12 +7,10 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
@@ -24,7 +22,7 @@ public class Estado implements Serializable {
 	private Integer id;
 	private String nome; 
 	
-	@JsonBackReference// evita 
+	@JsonIgnore
 	@OneToMany(mappedBy="estado")// estado = nome da column // um para muitos / obs:um estado pertence a varias cidades
 	private List<Cidade> cidades = new ArrayList<>();
 
