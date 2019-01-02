@@ -1,9 +1,13 @@
 package com.nelioalves.cursomc.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.nelioalves.cursomc.domain.Categoria;
@@ -48,6 +52,7 @@ public class CategoriaService {
 		return repo.save(obj);
 	}
 	
+	///deletando categoria
 	public void delete(Integer id) {
 		
 		find(id);
@@ -57,5 +62,17 @@ public class CategoriaService {
 			throw new DataIntegrityException("Não é possivel excluir uma categoria que possui produtos");
 		}
 		
+	}
+	
+	//pegando todas as categorias
+	public List<Categoria> findAll(){
+		
+		return repo.findAll();
+	}
+	
+	public Page<Categoria> findPage(Integer page,Integer linesPerPage,String orderBy,String direction){ // parametros numero da pagina,quantidade de linhas,ordenar por id,direção descente ou descente
+		PageRequest pagerequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+		
+		return repo.findAll(pagerequest);
 	}
 }
