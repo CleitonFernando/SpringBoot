@@ -54,5 +54,12 @@ public class CategoriaResources {
 		return ResponseEntity.noContent().build(); /// noContent 204 não retorna nada
 	}
 	
+	//deletar id
+	@RequestMapping(value="/{id}",method=RequestMethod.DELETE)
+	public ResponseEntity<Void>Delete(@PathVariable Integer id){
+		service.delete(id);
+		return ResponseEntity.noContent().build();
+	}
+	
 	
 }
