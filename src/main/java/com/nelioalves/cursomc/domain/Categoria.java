@@ -4,12 +4,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.Length;
 
@@ -25,8 +25,8 @@ public class Categoria  implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)//DEFINIDO A ESTRATEGIA DE GERAÇÃO AUTOMATICA DE ID 
 	private Integer id;
 	
-	@Length(max=65) /// tamanho maximo
-	@Column(nullable=false)
+	@Length(min=5, max=80, message="O tamanho deve ser entre 5 e 80 caracteres") /// tamanho maximo
+	@NotEmpty(message="Preenchimento obrigatorio")
 	private  String nome;
 	
 	@ManyToMany(mappedBy = "categorias")// mapeamento  da categoria ja feito do outra lado na classe produto em cima de categorias que a lista

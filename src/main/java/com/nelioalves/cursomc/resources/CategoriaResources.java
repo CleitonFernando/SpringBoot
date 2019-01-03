@@ -3,7 +3,8 @@ package com.nelioalves.cursomc.resources;
 import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -42,7 +43,9 @@ public class CategoriaResources {
 	
 	// postar criar
 	@RequestMapping(method=RequestMethod.POST) /// declarando o metodo post
-	public ResponseEntity<Void> insert(@RequestBody Categoria obj){ // essa anotação faz o json ser convertido em java automaticamente
+	public ResponseEntity<Void> insert(@Valid @RequestBody CategoriaDTO objDTO){ // essa anotação faz o json ser convertido em java automaticamente
+		
+		Categoria obj = service.fromDTO(objDTO);
 		
 		obj = service.Insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
@@ -53,7 +56,9 @@ public class CategoriaResources {
 
 	/// atualizar dados
 	@RequestMapping(value="/{id}",method=RequestMethod.PUT)
-	public ResponseEntity<Void>update(@RequestBody Categoria obj ,@PathVariable Integer id){
+	public ResponseEntity<Void>update(@Valid @RequestBody CategoriaDTO objDTO ,@PathVariable Integer id){
+		
+		Categoria obj = service.fromDTO(objDTO);
 		obj.setId(id);
 		obj = service.update(obj);
 		
