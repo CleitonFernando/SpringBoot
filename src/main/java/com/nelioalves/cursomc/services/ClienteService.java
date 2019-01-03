@@ -50,9 +50,10 @@ public class ClienteService {
 	
 	// atualizar categoria
 	public Cliente update(Cliente obj) {
-		Cliente newOBJ = find(obj.getId());
 		
-		updateData(newOBJ, obj);
+		Cliente newOBJ = find(obj.getId()); //pegando cliente com dados antigos
+		
+		updateData(newOBJ, obj);// atualizo o cliente com dados novos
 		return repo.save(newOBJ);
 	}
 	
@@ -86,7 +87,7 @@ public class ClienteService {
 		return new Cliente(objDTO.getId(),objDTO.getNome(),objDTO.getEmail(),null,null);
 	}
 	
-	///atualizado cliente
+	///atualizado cliente antigo para o novo dados
 	private void updateData(Cliente newOBJ, Cliente obj) {
 		 newOBJ.setNome(obj.getNome());
 		 newOBJ.setEmail(obj.getEmail());
