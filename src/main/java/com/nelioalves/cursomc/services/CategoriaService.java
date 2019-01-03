@@ -70,6 +70,8 @@ public class CategoriaService {
 		return repo.findAll();
 	}
 	
+	
+	//paginação
 	public Page<Categoria> findPage(Integer page,Integer linesPerPage,String orderBy,String direction){ // parametros numero da pagina,quantidade de linhas,ordenar por id,direção descente ou descente
 		PageRequest pagerequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		
