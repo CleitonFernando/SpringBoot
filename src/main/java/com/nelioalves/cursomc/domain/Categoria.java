@@ -25,8 +25,7 @@ public class Categoria  implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)//DEFINIDO A ESTRATEGIA DE GERAÇÃO AUTOMATICA DE ID 
 	private Integer id;
 	
-	@Length(min=5, max=80, message="O tamanho deve ser entre 5 e 80 caracteres") /// tamanho maximo
-	@NotEmpty(message="Preenchimento obrigatorio")
+	 /// tamanho maximo
 	private  String nome;
 	
 	@ManyToMany(mappedBy = "categorias")// mapeamento  da categoria ja feito do outra lado na classe produto em cima de categorias que a lista
