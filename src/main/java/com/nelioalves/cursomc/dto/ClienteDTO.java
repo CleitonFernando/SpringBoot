@@ -8,12 +8,14 @@ import javax.validation.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Length;
 
 import com.nelioalves.cursomc.domain.Cliente;
+import com.nelioalves.cursomc.services.validation.ClienteUpdate;
 /*
  * objeto de transferencia de dados 
  * usada para exibir todos os dados que você precisa para facilitar e simplificar algumas operaçoes
  * Otimizar o tráfego (trafegando menos dados
  * O DTO tem essencialmente esse papel de "view" que você mencionou. Isso é importante para você controlar quais dados (inclusive dados relacionados de outras entidades) deverão trafegar entre as requisições. 
  */
+@ClienteUpdate
 public class ClienteDTO implements Serializable{
 	private static final long serialVersionUID =1L;
 	
