@@ -1,5 +1,6 @@
 package com.nelioalves.cursomc.resources;
 
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.nelioalves.cursomc.domain.Cliente;
 import com.nelioalves.cursomc.dto.ClienteDTO;
+import com.nelioalves.cursomc.dto.ClienteNewDTO;
 import com.nelioalves.cursomc.services.ClienteService;
 
 // CAMADA CONTROLADORES REST costuma-se ter metodos pequenos
@@ -33,10 +36,25 @@ public class ClienteResources {
 	@Autowired // notacao para a classe instanciar sozinha
 	private ClienteService service;  // acessando o serviço
 	
+	
+	
 	@RequestMapping(value="/{id}",method = RequestMethod.GET)
 	public ResponseEntity<Cliente> find(@PathVariable Integer id) { 	// esse reponse é um tipo especial do spring boot que ele ja encapsula e armazena varias informações de uma respostas http para um serviço rest <?> pode ser varias tipos pode encontrar ou não encontrar
 		Cliente obj = service.find(id);
 		return ResponseEntity.ok().body(obj); //retorna uma respostas que ocorreu com sucesso e juntamente com obj
+	}
+	
+	/// inserir cliente 
+	@RequestMapping(method=RequestMethod.POST) /// declarando o metodo post
+	public ResponseEntity<Void> insert(@Valid @RequestBody ClienteNewDTO objDTO){ // essa anotação faz o json ser convertido em java automaticamente
+		
+		Cliente obj = service.fromDTO(objDTO);
+		
+		obj = service.Insert(obj);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+				.path("/id").buildAndExpand(obj.getId()).toUri();
+		
+		return ResponseEntity.created(uri).build(); // return a uri  201
 	}
 	
 	/// atualizar dados
