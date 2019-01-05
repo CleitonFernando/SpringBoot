@@ -27,7 +27,7 @@ public class Produto implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)//DEFINIDO A ESTRATEGIA DE GERAÇÃO AUTOMATICA DE ID 
 	private Integer id;
 	private String nome;
-	private Double Preço;
+	private Double Preco;
 	/*
 	 * um relacionanmento de muitos para muitos uma categoria pode ter varios produto
 	 * um produto pode ter varias categorias então cria-se uma tela nova  com id das duas tabelas
@@ -50,10 +50,10 @@ public class Produto implements Serializable {
 		
 	}
 
-	public Produto(Integer id, String nome, Double preço) {
+	public Produto(Integer id, String nome, Double preco) {
 		this.id = id;
 		this.nome = nome;
-		Preço = preço;
+		Preco = preco;
 	}
 	
 	@JsonIgnore
@@ -81,12 +81,12 @@ public class Produto implements Serializable {
 		this.nome = nome;
 	}
 
-	public Double getPreço() {
-		return Preço;
+	public Double getPreco() {
+		return Preco;
 	}
 
-	public void setPreço(Double preço) {
-		Preço = preço;
+	public void setPreco(Double preço) {
+		Preco = preço;
 	}
 
 	public List<Categoria> getCategorias() {

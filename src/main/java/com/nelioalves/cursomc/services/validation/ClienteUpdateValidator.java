@@ -18,7 +18,7 @@ import com.nelioalves.cursomc.resources.exception.FieldMessage;
 
 public class ClienteUpdateValidator implements ConstraintValidator<ClienteUpdate, ClienteDTO> {
 	@Autowired
-	private HttpServletRequest request;
+	private HttpServletRequest request; /// acessar a uri chamasse a httpservlet
 	
 	@Autowired
 	private ClienteRepository repo;
@@ -32,12 +32,13 @@ public class ClienteUpdateValidator implements ConstraintValidator<ClienteUpdate
 	public boolean isValid(ClienteDTO objDto, ConstraintValidatorContext context) {
 		
 		Map<String,String> map = (Map<String,String>) request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
-		map.get("id");
-		Integer uriId = Integer.parseInt(map.get("id"));
+		map.get("id"); // pegando o id da uri
+		Integer uriId = Integer.parseInt(map.get("id")); // convertendo a uri string em inteiro
 		
 		List<FieldMessage> list = new ArrayList<>(); // carrega a messagem de erro com o nome campo e a mensagem
 		
 		Cliente aux = repo.findByEmail(objDto.getEmail());
+		
 		if(aux != null && !aux.getId().equals(uriId)) {
 			list.add(new FieldMessage("email","Email ja existente"));
 		}
