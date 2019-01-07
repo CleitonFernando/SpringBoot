@@ -1,14 +1,17 @@
 package com.nelioalves.cursomc.resources;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.net.URI;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.nelioalves.cursomc.domain.Pedido;
 import com.nelioalves.cursomc.services.PedidoService;
@@ -33,5 +36,14 @@ public class PedidoResources {
 		return ResponseEntity.ok().body(obj); //retorna uma respostas que ocorreu com sucesso e juntamente com obj
 	}
 	
+	@RequestMapping(method=RequestMethod.POST) /// declarando o metodo post
+	public ResponseEntity<Void> insert(@Valid @RequestBody Pedido obj){ // essa anotação faz o json ser convertido em java automaticamente
+	
+		obj = service.insert(obj);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+				.path("/id").buildAndExpand(obj.getId()).toUri();
+		
+		return ResponseEntity.created(uri).build(); // return a uri  201
+	}
 	
 }
