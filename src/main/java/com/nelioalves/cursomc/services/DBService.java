@@ -115,7 +115,7 @@ public class DBService {
 				est2.getCidades().addAll(Arrays.asList(c3));
 				
 				//instanciando cliente
-				Cliente cli1 = new Cliente(null,"maria","maria@gmail.com","123",TipoCliente.PESSOAFISICA);
+				Cliente cli1 = new Cliente(null,"maria","maria@gmail.com","69154782058",TipoCliente.PESSOAFISICA);
 				// adicionando telefones a lista
 				cli1.getTelefones().addAll(Arrays.asList("1885","8555"));
 				// instancia endereços

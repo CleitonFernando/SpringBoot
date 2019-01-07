@@ -28,8 +28,10 @@ public class Cliente implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
+	
 	@Column(unique=true) /*garante que essa dado nao pode ser repetido*/
 	private String email;
+	
 	private String cpfOuCnpj;
 	private Integer Tipo;
 	
