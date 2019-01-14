@@ -20,6 +20,7 @@ import com.nelioalves.cursomc.domain.PagamentoComCartao;
 import com.nelioalves.cursomc.domain.Pedido;
 import com.nelioalves.cursomc.domain.Produto;
 import com.nelioalves.cursomc.domain.enums.EstadoPagamento;
+import com.nelioalves.cursomc.domain.enums.Perfil;
 import com.nelioalves.cursomc.domain.enums.TipoCliente;
 import com.nelioalves.cursomc.repositories.CategoriaRepository;
 import com.nelioalves.cursomc.repositories.CidadeRepository;
@@ -119,14 +120,24 @@ public class DBService {
 				est2.getCidades().addAll(Arrays.asList(c3));
 				
 				//instanciando cliente
-				Cliente cli1 = new Cliente(null,"maria","cleitontexas@gmail.com","69154782058",TipoCliente.PESSOAFISICA,pe.encode("123"));
-				// adicionando telefones a lista
+				Cliente cli1 = new Cliente(null,"maria Silva","cleitontexas@gmail.com","69154782058",TipoCliente.PESSOAFISICA,pe.encode("123"));
 				cli1.getTelefones().addAll(Arrays.asList("1885","8555"));
+				
+				Cliente cli2 = new Cliente(null,"Ana Costa","cleitontexas@hotmail.com","04354841096",TipoCliente.PESSOAFISICA,pe.encode("123"));
+				cli2.addPerfil(Perfil.ADMIN);
+				cli2.getTelefones().addAll(Arrays.asList("999999","11111111"));
+
+				// adicionando telefones a lista
+				
 				// instancia endereços
 				Endereco e1 = new Endereco(null,"Rua flores","300","apto 303","Jardim","38220834",cli1,c1);
 				Endereco e2 = new Endereco(null,"Avenida Matos","105","sala 800","centro","387777012",cli1,c2);
+				
+				Endereco e3 = new Endereco(null,"Avenida Flores","1051",null,"centro","14920000",cli1,c2);
+
 				// adicionando endereços a lista
 				cli1.getEnderecos().addAll(Arrays.asList(e1,e2));
+				cli2.getEnderecos().addAll(Arrays.asList(e3));
 				
 				// Formatando a data
 				SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy HH:mm");
@@ -167,9 +178,9 @@ public class DBService {
 				// salvando a cidade no banco de dados 
 				cidadeRepository.saveAll(Arrays.asList(c1,c2,c3));
 				/// salvando cliente no banco de dados
-				clienteRepository.saveAll(Arrays.asList(cli1));
+				clienteRepository.saveAll(Arrays.asList(cli1,cli2));
 				// salvando endereços no banco de dados
-				enderecoRepository.saveAll(Arrays.asList(e1,e2));
+				enderecoRepository.saveAll(Arrays.asList(e1,e2,e3));
 				// salvando pedido no banco de dadoos
 				pedidoRepository.saveAll(Arrays.asList(ped1,ped2));
 				pagamentoRepository.saveAll(Arrays.asList(pagto1,pagto2));
