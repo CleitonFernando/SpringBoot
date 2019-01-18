@@ -11,15 +11,14 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.nelioalves.cursomc.domain.enums.Perfil;
 
 public class UserSS implements UserDetails {
+	private static final long serialVersionUID = 1L;
 
 	private Integer id;
 	private String email;
 	private String senha;
 	private Collection<? extends GrantedAuthority> authorities;
 	
-	public Integer getId() {
-		return id;
-	}
+	
 	
 	public UserSS() {
 		
@@ -33,6 +32,9 @@ public class UserSS implements UserDetails {
 		this.authorities = perfis.stream().map(x->new SimpleGrantedAuthority(x.getDescricao())).collect(Collectors.toList());
 	}
 
+	public Integer getId() {
+		return id;
+	}
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub
@@ -73,6 +75,10 @@ public class UserSS implements UserDetails {
 	public boolean isEnabled() {
 		// TODO Auto-generated method stub
 		return true;
+	}
+	
+	public boolean hasRole(Perfil perfil) {
+		return getAuthorities().contains(new SimpleGrantedAuthority(perfil.getDescricao()));
 	}
 
 }

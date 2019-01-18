@@ -19,6 +19,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import com.nelioalves.cursomc.security.JWTAuthenticationFilter;
+import com.nelioalves.cursomc.security.JWTAutorizationFilter;
 import com.nelioalves.cursomc.security.JWTUtil;
 
 /*
@@ -60,6 +61,7 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter{
 		.antMatchers(PUBLIC_MATCHERS).permitAll()//PERMITE TODOS OS CAMINHOS QUE ESTA NESSE VETOR 
 		.anyRequest().authenticated();// O RESTO PRECISA AUTENTICAR
 		http.addFilter(new JWTAuthenticationFilter(authenticationManager(),jwtUtil));
+		http.addFilter(new JWTAutorizationFilter(authenticationManager(),jwtUtil,userDetailsService));
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 	}
 	@Override
